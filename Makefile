@@ -47,11 +47,11 @@ ejercicio1_test:
 
 ejercicio2_test:
 	@echo Ejecutando ejercicio2
-	@./ejercicio2 -tamanio 1 -numP 5
+	@./ejercicio2 -tamanio 5 -numP 1
 
 ejercicio3_test:
 	@echo Ejecutando ejercicio3
-	@./ejercicio3 -tamanio 1 -numP 5
+	@./ejercicio3 -tamanio 5 -numP 5
 
 ejercicio4_test:
 	@echo Ejecutando ejercicio4

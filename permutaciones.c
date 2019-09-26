@@ -9,7 +9,7 @@
  *
  */
 
-
+#include <stdio.h>
 #include "permutaciones.h"
 
 /***************************************************/
@@ -27,7 +27,8 @@
 /***************************************************/
 int aleat_num(int inf, int sup)
 {
-  /* vuestro codigo */
+	inf--;
+	return rand()%(sup-inf)+inf;
 }
 
 /***************************************************/
@@ -45,10 +46,32 @@ int aleat_num(int inf, int sup)
 /* que contiene a la permutacion                   */
 /* o NULL en caso de error                         */
 /***************************************************/
-int* genera_perm(int N)
-{
-  /* vuestro codigo */
+
+int* genera_perm(int N) {
+	int* array = NULL;
+	int i, tmp, aux;
+
+	array = (int*)calloc(N, sizeof(int));
+
+	if(!array)
+		return NULL;
+
+	for(i = 0; i < N; i++) {
+		array[i] = i;
+	} 
+
+	for(i = 0; i < N; i++) {
+		aux = aleat_num(i,N);
+		tmp = array[i];
+		array[i] = array[aux];
+		array[aux] = tmp;
+	}
+
+
+	return array;
 }
+
+
 
 /***************************************************/
 /* Funcion: genera_permutaciones Fecha:            */
@@ -67,7 +90,17 @@ int* genera_perm(int N)
 /* permutaciones                                   */
 /* NULL en caso de error                           */
 /***************************************************/
-int** genera_permutaciones(int n_perms, int N)
-{
-/* vuestro codigo */
+int** genera_permutaciones(int n_perms, int N) {
+	int** array = NULL;
+	int i;
+
+	array = (int**)malloc(n_perms * sizeof(int*));
+
+	if(!array)
+		return NULL;
+
+	for(i = 0; i < n_perms; i++) {
+			array[i] = genera_perm(N);
+	}
+	return array;
 }

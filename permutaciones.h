@@ -12,6 +12,9 @@
 #ifndef PERMUTACIONES_H
 #define PERMUTACIONES_H
 
+#include <stdlib.h>
+/* #define DEBUG() printf("%d\n",__LINE__) */
+
 /* constantes */
 
 #ifndef ERR
