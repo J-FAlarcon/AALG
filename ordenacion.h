@@ -12,6 +12,8 @@
 #ifndef ORDENACION_H
 #define ORDENACION_H
 
+#include "permutaciones.h"
+
 /* constantes */
 
 #ifndef ERR

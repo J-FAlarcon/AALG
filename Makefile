@@ -3,7 +3,7 @@
 # Se asume que los ficheros fuente se llaman ejercicio1.c, ejercicio2.c,...,ordenar.h
 #-----------------------
 
-CC = gcc -ansi -pedantic
+CC = gcc -pedantic
 CFLAGS = -Wall
 EXE = ejercicio1 ejercicio2 ejercicio3 ejercicio4 ejercicio5
 
@@ -27,14 +27,14 @@ permutaciones.o : permutaciones.c permutaciones.h
 	@echo "# Ha cambiado $<"
 	$(CC) $(CFLAGS) -c $<
 
- ordenacion.o : ordenacion.c ordenacion.h
+ordenacion.o : ordenacion.c ordenacion.h
 	@echo "#---------------------------"
 	@echo "# Generando $@"
 	@echo "# Depende de $^"
 	@echo "# Ha cambiado $<"
 	$(CC) $(CFLAGS) -c $<
 
- tiempos.o : tiempos.c tiempos.h
+tiempos.o : tiempos.c tiempos.h
 	@echo "#---------------------------"
 	@echo "# Generando $@"
 	@echo "# Depende de $^"
@@ -55,7 +55,7 @@ ejercicio3_test:
 
 ejercicio4_test:
 	@echo Ejecutando ejercicio4
-	@./ejercicio4 -tamanio 1
+	@./ejercicio4 -tamanio 5
 
 ejercicio5_test:
 	@echo Ejecutando ejercicio5
