@@ -9,6 +9,8 @@
  *
  */
 #include <time.h>
+#include <stdio.h>
+
 
 #include "tiempos.h"
 #include "ordenacion.h"
@@ -84,13 +86,18 @@ short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero,
 /***************************************************/
 short guarda_tabla_tiempos(char* fichero, PTIEMPO tiempo, int n_tiempos)
 {
-	/*FILE *f = NULL;
+	FILE *f = NULL;
 
 	f = fopen(fichero, "w");
 	if(!f)
 		return ERR;
 
-	fclose(f);*/
+	tiempo_medio_ordenacion(metodo, n_tiempos, N, ptiempo);
+
+
+
+
+	fclose(f);
 }
 
 
