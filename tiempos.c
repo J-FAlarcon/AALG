@@ -52,7 +52,6 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
 	ptiempo->n_elems = n_perms;
 	ptiempo->min_ob = min;
 	ptiempo->max_ob = max;
-	ptiempo->max_ob = max;
 	ptiempo->medio_ob = sum/i;
 	ptiempo->tiempo = avgT;
 
@@ -69,12 +68,20 @@ short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero,
                                 int incr, int n_perms)
 {
 	PTIEMPO tiempo = NULL;
-
+	int i=0;
 	
+	tiempo=(PTIEMPO)malloc(sizeof(PTIEMPO));
+	if(!tiempo)
+		return ERR;
+
 	while(num_min <= num_max) {
-		guarda_tabla_tiempos(fichero, tiempo, n_perms);
+		tiempo_medio_ordenacion( metodo, n_perms,num_min,tiempo);
 		num_min += incr;
+		i++;
 	}
+
+	guarda_tabla_tiempos(fichero, tiempo, i);
+
 	return OK;
 }
 
@@ -87,17 +94,21 @@ short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero,
 short guarda_tabla_tiempos(char* fichero, PTIEMPO tiempo, int n_tiempos)
 {
 	FILE *f = NULL;
+	int i=0;
 
 	f = fopen(fichero, "w");
 	if(!f)
 		return ERR;
 
-	tiempo_medio_ordenacion(metodo, n_tiempos, N, ptiempo);
-
-
-
+	while(i<n_tiempos){
+	fprintf(f, "%d %lf %lf %d %d \n", tiempo[i].N,tiempo[i].tiempo,tiempo[i].medio_ob,tiempo[i].min_ob,tiempo[i].max_ob);
+	i++;
+	}
 
 	fclose(f);
+
+	return OK;
+	
 }
 
 

@@ -22,6 +22,10 @@ int main(int argc, char** argv)
 {
   int i;
   unsigned int inf, sup, num, j;
+  FILE* f = NULL;
+
+	f = fopen("file.txt","w");
+  
 
   srand(time(NULL));
 
@@ -53,9 +57,10 @@ int main(int argc, char** argv)
 
   /* imprimimos los datos */
   for(j = 0; j < num; j++) { 
-    printf("%d\n", aleat_num(inf, sup));
+    fprintf(f,"%d\n", aleat_num(inf, sup));
   }
 
+  fclose(f);
   return 0;
 }
 

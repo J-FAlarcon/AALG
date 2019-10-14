@@ -61,3 +61,10 @@ ejercicio5_test:
 	@echo Ejecutando ejercicio5
 	@./ejercicio5 -num_min 1 -num_max 5 -incr 1 -numP 5 -fichSalida ejercicio5.log
 
+histograma:
+	./ejercicio1 -limInf 1 -limSup 5 -numN 100
+	cat file.txt | sort -n | uniq -c > file2.txt
+	gnuplot -p -e "set style data histograms; plot './file2.txt' using 1:xtic(2)"
+	
+	
+
