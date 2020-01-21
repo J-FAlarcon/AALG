@@ -38,9 +38,9 @@ int main(int argc, char** argv)
     fprintf(stderr, " -numN : Cantidad de numeros a generar.\n");
     exit(-1);
   }
-  printf("Practica numero 1, apartado 1\n");
-  printf("Realizada por: Vuestros nombres\n");
-  printf("Grupo: Vuestro grupo\n");
+  printf("Practica numero 2, apartado 1\n");
+  printf("Realizada por: Guillermo López y Javier Fernández de Alarcón\n");
+  printf("Grupo: 1261\n");
 
   /* comprueba la linea de comandos */
   for(i = 1; i < argc; i++) {
@@ -57,7 +57,7 @@ int main(int argc, char** argv)
 
   /* imprimimos los datos */
   for(j = 0; j < num; j++) { 
-    fprintf(f,"%d\n", aleat_num(inf, sup));
+    fprintf(stdout,"%d\n", aleat_num(inf, sup));
   }
 
   fclose(f);

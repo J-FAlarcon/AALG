@@ -27,7 +27,6 @@
 /***************************************************/
 int aleat_num(int inf, int sup)
 {
-	inf--;
 	return rand()%(sup-inf)+inf;
 }
 
@@ -50,8 +49,11 @@ int aleat_num(int inf, int sup)
 int* genera_perm(int N) {
 	int* array = NULL;
 	int i, tmp, aux;
+	
 
-	array = (int*)calloc(N, sizeof(int));
+	
+	array = (int*)malloc(N*sizeof(int));
+
 
 	if(!array)
 		return NULL;
@@ -66,6 +68,7 @@ int* genera_perm(int N) {
 		array[i] = array[aux];
 		array[aux] = tmp;
 	}
+
 
 
 	return array;
@@ -94,13 +97,16 @@ int** genera_permutaciones(int n_perms, int N) {
 	int** array = NULL;
 	int i;
 
-	array = (int**)malloc(n_perms * sizeof(int*));
+	
+	array = (int**)malloc(n_perms  *sizeof(int*));
 
 	if(!array)
 		return NULL;
 
 	for(i = 0; i < n_perms; i++) {
 			array[i] = genera_perm(N);
+			if(array[i]==NULL) return NULL;
 	}
+
 	return array;
 }

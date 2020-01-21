@@ -44,9 +44,9 @@ int main(int argc, char** argv)
     exit(-1);
   }
 
-  printf("Practica numero 1, apartado 5\n");
-  printf("Realizada por: Vuestros nombres\n");
-  printf("Grupo: Vuestro grupo\n");
+  printf("Practica numero 2, apartado 5\n");
+  printf("Realizada por: Guillermo López y Javier Fernández de Alarcón\n");
+  printf("Grupo: 1261\n");
 
   /* comprueba la linea de comandos */
   for(i = 1; i < argc ; i++) {
@@ -66,7 +66,7 @@ int main(int argc, char** argv)
   }
 
   /* calculamos los tiempos */
-  ret = genera_tiempos_ordenacion(InsertSort, nombre,num_min, num_max,incr, n_perms);
+  ret = genera_tiempos_ordenacion(quicksort, nombre,num_min, num_max,incr, n_perms);
   if (ret == ERR) { /* ERR_TIME debera ser un numero negativo */
     printf("Error en la funcion Time_Ordena\n");
     exit(-1);

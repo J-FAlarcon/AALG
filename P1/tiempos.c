@@ -11,7 +11,6 @@
 #include <time.h>
 #include <stdio.h>
 
-
 #include "tiempos.h"
 #include "ordenacion.h"
 
@@ -26,15 +25,17 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
                               int N, 
                               PTIEMPO ptiempo)
 {
-	clock_t start_t, end_t, total_t;
+	
 	int i, *array, ob, max, min, sum, sumT;
-	double avgT;
+	double total_time = 0.0;
+	clock_t time1, time2;
 
-	for(i = 0, max = min = sum = sumT = total_t = 0; i < n_perms; i++) {
+	for(i = 0, max = min = sum = sumT = 0; i < n_perms; i++) {
 		array = genera_perm(N);
-		start_t = clock();
-		ob = InsertSort(array, 0, N-1);
-		end_t = clock();
+		if(array==NULL) return ERR;
+		time1 = clock();
+		ob = metodo(array, 0, N-1);
+		time2 = clock();
 		if(max == 0 && min == 0) {
 			max = min = ob;
 		}
@@ -43,17 +44,19 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
 		if(ob < min)
 			min = ob;
 		sum += ob;
-		total_t += (double)(end_t - start_t);
+		
+		free(array);
 	}
-
-	avgT = total_t/i;
+	total_time = 1000000*(time2 - time1)/CLOCKS_PER_SEC;
+	
+	
 
 	ptiempo->N = N;
 	ptiempo->n_elems = n_perms;
 	ptiempo->min_ob = min;
 	ptiempo->max_ob = max;
-	ptiempo->medio_ob = sum/i;
-	ptiempo->tiempo = avgT;
+	ptiempo->medio_ob = 1.*sum/i;
+	ptiempo->tiempo = total_time;
 
 	return OK;
 }
@@ -68,19 +71,21 @@ short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero,
                                 int incr, int n_perms)
 {
 	PTIEMPO tiempo = NULL;
-	int i=0;
+	int i;
 	
-	tiempo=(PTIEMPO)malloc(sizeof(PTIEMPO));
+	tiempo=(PTIEMPO)malloc(n_perms * sizeof(TIEMPO));
+
 	if(!tiempo)
 		return ERR;
 
-	while(num_min <= num_max) {
-		tiempo_medio_ordenacion( metodo, n_perms,num_min,tiempo);
+	for(i = 0; num_min <= num_max; i++) {
+		tiempo_medio_ordenacion(metodo, n_perms,num_min, &tiempo[i]);
 		num_min += incr;
-		i++;
 	}
 
-	guarda_tabla_tiempos(fichero, tiempo, i);
+	if(guarda_tabla_tiempos(fichero, tiempo, i)==ERR) return ERR;
+
+	free(tiempo);
 
 	return OK;
 }
@@ -101,8 +106,8 @@ short guarda_tabla_tiempos(char* fichero, PTIEMPO tiempo, int n_tiempos)
 		return ERR;
 
 	while(i<n_tiempos){
-	fprintf(f, "%d %lf %lf %d %d \n", tiempo[i].N,tiempo[i].tiempo,tiempo[i].medio_ob,tiempo[i].min_ob,tiempo[i].max_ob);
-	i++;
+		fprintf(f, "N= %d Tiempo= %lf ns MedioOb= %.3lf MinOB= %d MaxOB= %d \n", tiempo[i].N,tiempo[i].tiempo,tiempo[i].medio_ob,tiempo[i].min_ob,tiempo[i].max_ob);
+		i++;
 	}
 
 	fclose(f);
